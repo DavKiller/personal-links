@@ -30,7 +30,10 @@ h2 {
     margin-bottom: 20px;
 }
 .link-button {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:10px;
     text-align: center;
     width: 100%;
     padding: 15px;
