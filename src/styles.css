@@ -54,7 +54,7 @@ h2 {
     background-color: #1DA1F2;
 }
 #github {
-    background-color: #bcbcbc;
+    background-color: #636363;
 }
 #bluesky {
     background-color: #1185FE;
@@ -66,3 +66,43 @@ h2 {
 #steam{
     background-color: #171a21;
 }
+
+.link-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.link-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 200%;
+    height: 200%;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo de expansión */
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.link-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.link-button:focus {
+    outline: 2px dashed #ffffff; /* Borde visible */
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+    }
+    .link-button {
+        font-size: 14px; /* Reduce el tamaño del texto */
+        padding: 10px;
+    }
+}
+
