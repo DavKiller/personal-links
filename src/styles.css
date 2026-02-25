@@ -1,110 +1,436 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+:root {
+    --aero-glass: rgba(0, 0, 0, 0.3); /* Darker glass base */
+    --aero-border: rgba(255, 255, 255, 0.2);
+    --aero-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    --aero-text: #ffffff;
+    --aero-accent: #0088cc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    font-family: sans-serif;
-    margin: 0;
-    background-color: #181818; /* Color de fondo oscuro */
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Custom Renfe Background */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('Renfe patito.PNG') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -2;
+}
+
+/* Dark Overlay for better contrast */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Increased darkness */
+    z-index: -1;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: #282828; /* Color de fondo del contenedor */
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    background: var(--aero-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--aero-border);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--aero-shadow);
+    width: 380px;
+    max-width: 95%;
+    z-index: 10;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
-    color: #ffffff; /* Color del texto */
-    margin-bottom: 20px;
-}
-h2 {
-    color: #ffffff; /* Color del texto */
-    margin-bottom: 20px;
-}
-.link-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap:10px;
-    text-align: center;
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    color: #ffffff; /* Color del texto de los botones */
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    color: var(--aero-text);
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
-#telegram {
-    background-color: #0088cc;
+.logo {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 25px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--aero-border);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-#telegram-art {
-    background-color: #0088cc;
+
+.logo:hover {
+    transform: scale(1.1);
 }
-#twitter {
-    background-color: #1DA1F2;
-}
-#github {
-    background-color: #636363;
-}
-#bluesky {
-    background-color: #1185FE;
-}
-#furaffinity{
-    background-color: #000000;
-}
-#steam{
-    background-color: #171a21;
-}
-#barq{
-    background-color: #f76808;
+
+.links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .link-button {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px;
+    color: #fff;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2); /* Darker base */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.4s ease;
     overflow: hidden;
-    z-index: 1;
+    backdrop-filter: blur(4px);
 }
 
+/* Glossy highlight effect */
 .link-button::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 200%;
-    height: 200%;
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo de expansión */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 100%);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+/* Crystallization sweep on hover */
+.link-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: all 0.6s ease;
+}
+
+.link-button:hover::after {
+    left: 100%;
+}
+
+.link-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.05);
+    transform: scale(1.02);
+}
+
+.link-button i, .link-button svg {
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
+}
+
+/* Specific colors with reduced opacity for better crystallization - even darker */
+#telegram { background-color: rgba(0, 102, 153, 0.3); }
+#telegram-art { background-color: rgba(0, 102, 153, 0.3); }
+#twitter { background-color: rgba(20, 112, 170, 0.3); }
+#github { background-color: rgba(60, 60, 60, 0.4); }
+#bluesky { background-color: rgba(10, 80, 160, 0.3); }
+#furaffinity { background-color: rgba(0, 0, 0, 0.5); }
+#steam { background-color: rgba(15, 17, 22, 0.5); }
+#barq { background-color: rgba(180, 75, 5, 0.3); }
+#mail { background-color: rgba(90, 45, 110, 0.4); }
+
+/* Custom Aero Cursor - Using a simpler pointer as fallback */
+html, body {
+    cursor: url('https://cur.cursors-4u.net/navigation/nav-1/nav5.cur'), default;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+a, button, .link-button {
+    cursor: url('https://cur.cursors-4u.net/navigation/nav-1/nav4.cur'), pointer;
+}
+
+/* Loader Styles */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.loader-content {
+    text-align: center;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.windows-logo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    animation: logo-rotate 10s infinite linear;
+}
+
+.logo-box {
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.box-1 { background-color: #f35325; animation: pulse 2s infinite 0.1s; }
+.box-2 { background-color: #81bc06; animation: pulse 2s infinite 0.2s; }
+.box-3 { background-color: #05a6f0; animation: pulse 2s infinite 0.3s; }
+.box-4 { background-color: #ffba08; animation: pulse 2s infinite 0.4s; }
+
+@keyframes logo-rotate {
+    0% { transform: perspective(500px) rotateY(0deg); }
+    100% { transform: perspective(500px) rotateY(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; filter: brightness(1.2) blur(1px); }
+}
+
+/* Gadgets */
+.gadgets {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+}
+
+.gadget {
+    background: var(--aero-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    color: #fff;
+    box-shadow: 
+        var(--aero-shadow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    min-width: 200px;
+    animation: slideInRight 1s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gadget Window Header Gloss */
+.gadget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.spotify-gadget {
+    padding: 5px; /* Tiny padding to show the glass border */
+    height: 90px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.spotify-gadget::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+#clock-time {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-family: 'Segoe UI', serif;
+}
+
+#clock-date {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.status-gadget {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background: #4cd137;
     border-radius: 50%;
-    transition: transform 0.5s ease;
-    z-index: -1;
+    box-shadow: 0 0 10px #4cd137;
+    animation: glow-green 2s infinite;
 }
 
-.link-button:hover::before {
-    transform: translate(-50%, -50%) scale(1);
+.spotify-gadget iframe {
+    display: block;
+    width: 100%;
+    height: 80px;
+    border: none;
+    border-radius: 8px;
+    filter: brightness(0.9) contrast(1.1);
 }
 
-.link-button:focus {
-    outline: 2px dashed #ffffff; /* Borde visible */
-    outline-offset: 3px;
+@keyframes glow-green {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Floating Particles */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: float-around linear infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes float-around {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translate(100px, -200px) rotate(360deg); opacity: 0; }
+}
+
+/* Utilities */
+.fade-in {
+    animation: fadeIn 1.5s ease-out 2s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.utility-button {
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin-top: 10px;
+    border-style: dashed !important;
+}
+
+.utility-button.success {
+    background: rgba(76, 209, 55, 0.3) !important;
+    border-style: solid !important;
 }
 
 @media (max-width: 480px) {
-    .container {
-        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+    body {
+        justify-content: flex-start;
+        padding: 20px 0;
+        overflow-y: auto;
     }
+
+    .gadgets {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 90%;
+        margin: 0 auto 30px;
+        align-items: center;
+    }
+    
+    .gadget {
+        width: 100%;
+        min-width: auto;
+        animation: fadeIn 1s ease-out;
+    }
+
+    .container {
+        padding: 30px 20px;
+        margin-bottom: 40px;
+    }
+
     .link-button {
-        font-size: 14px; /* Reduce el tamaño del texto */
-        padding: 10px;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
     }
 }
-
